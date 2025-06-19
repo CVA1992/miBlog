@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Página de Inicio{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1>Bienvenido a mi sitio</h1>
+        <p>Contenido específico de esta página...</p>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                Sidebar content
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// JS específico para esta página
+console.log("Página de inicio cargada");
+</script>
+{% endblock %}

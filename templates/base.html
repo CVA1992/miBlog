@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% include 'include/head.html' %}
+</head>
+<body>
+    {% include 'include/header.html' %}
+    
+    <main class="container mt-4">
+        {% block content %}
+        <!-- El contenido específico de cada página irá aquí -->
+        {% endblock %}
+    </main>
+    
+    {% include 'include/footer.html' %}
+    {% include 'include/scripts.html' %}
+    {% block extra_js %}
+    <!-- JS adicional específico de algunas páginas -->
+    {% endblock %}
+</body>
+</html>

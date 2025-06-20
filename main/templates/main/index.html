@@ -25,7 +25,7 @@
         <h5 class="card-title">{{ publicacion.title }}</h5>
         </a>
         <h6 class="card-subtitle mb-2 text-body-secondary">
-            {{ publicacion.author }} / {{ publicacion.created }}
+            <a href="{% url 'users:perfil_usuario' user_id=publicacion.author.id %}">{{ publicacion.author }} </a> / {{ publicacion.created }}
         </h6>
         
         <!-- Mostrar imagen solo si existe -->

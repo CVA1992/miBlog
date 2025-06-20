@@ -6,7 +6,6 @@
 <div class="row">
     <div class="col-md-8">
         <h1>Bienvenido a mi sitio</h1>
-        <p>Contenido específico de esta página...</p>
     </div>
     <div class="col-md-4">
         <div class="card">
@@ -16,9 +15,34 @@
         </div>
     </div>
     {%for publicacion in publicaciones%}
-    <h1> {{publicacion.title}}</h1>
-    <img src='{{publicacion.image.url}}'>
+    {% comment %} <div class="col-md-6">
+        <img src='{{publicacion.image.url}}' class='img-fluid'>
+    </div> {% endcomment %}
     
+    <div class="col-md-12 border-bottom mb-3">
+      <div class="card-body">
+        <a href="{% url 'posts:publicacion' publicacion.id %}">
+        <h5 class="card-title">{{ publicacion.title }}</h5>
+        </a>
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+            {{ publicacion.author }} / {{ publicacion.created }}
+        </h6>
+        
+        <!-- Mostrar imagen solo si existe -->
+        {% if publicacion.image %}
+            <div class="mb-3">
+                <img 
+                    src="{{ publicacion.image.url }}" 
+                    alt="Imagen de {{ publicacion.title }}" 
+                    class="img-fluid rounded w-50"
+                >
+            </div>
+        {% endif %}
+        
+        <p class="card-text">{{ publicacion.content }}</p>
+      </div>
+    </div>
+  
     {% endfor %}
 </div>
 {% endblock %}

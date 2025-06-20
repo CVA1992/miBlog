@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content%}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-body">
+            
+            <h5 class="card-title">{{ publicacion.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                {{ publicacion.author }} / {{ publicacion.created }}
+            </h6>
+            
+            <!-- Mostrar imagen solo si existe -->
+            {% if publicacion.image %}
+                <div class="mb-3">
+                    <img 
+                        src="{{ publicacion.image.url }}" 
+                        alt="Imagen de {{ publicacion.title }}" 
+                        class="img-fluid rounded w-50"
+                    >
+                </div>
+            {% endif %}
+            
+            <p class="card-text">{{ publicacion.content }}</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {%for comentario in comentarios%}
+        <h6>{{comentario.content}}</h6>
+        {%endfor%}
+    </div>
+</div>
+{%endblock%}

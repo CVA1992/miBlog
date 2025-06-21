@@ -5,7 +5,10 @@
 {% block content %}
 <div class="row">
     <div class="col-md-8">
-        <h1>Bienvenido a mi sitio</h1>
+        <a href="{% url 'posts:post_form'%}">
+            <h3>Crear nueva Publicacion</h3>
+        </a>
+
     </div>
     <div class="col-md-4">
         <div class="card">

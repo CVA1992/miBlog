@@ -44,3 +44,18 @@ def publicacion_editar(request,pk):
     else:
         form = PostForm(instance=publicacion)
     return render(request,'posts/publicacion_editar.html',{'form':form, 'publicacion':publicacion})
+@login_required
+def eliminar(request, pk):
+    publicacion = get_object_or_404(Post, pk=pk)
+    
+    # Verificar si el usuario es el autor
+    if request.user != publicacion.author:
+        messages.error(request, 'No tienes permiso para eliminar esta publicación')
+        return redirect('posts:publicacion', pk=publicacion.pk)
+    
+    if request.method == 'POST':
+        publicacion.delete()
+        messages.success(request, 'Publicación eliminada correctamente')
+        return redirect('main:index')
+    
+    return render(request, 'posts/publicacion_confirm_delete.html', {'publicacion': publicacion})

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Post, Comment
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 # Create your views here.
 def publicacion(request, pk):
@@ -22,7 +22,7 @@ def crear_publicacion(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('posts:pu{% if es_autor %}blicacion', pk=post.pk)
+            return redirect('posts:publicacion', pk=post.pk)
     else:
         form=PostForm()
     return render(request,'posts/post_form.html',{'form':form})
@@ -59,3 +59,17 @@ def eliminar(request, pk):
         return redirect('main:index')
     
     return render(request, 'posts/publicacion_confirm_delete.html', {'publicacion': publicacion})
+@login_required
+def comentar(request, pk):
+    publicacion = get_object_or_404(Post, pk=pk)
+    if request.method=='POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.author = request.user
+            comentario.post = publicacion
+            comentario.save()
+            return redirect('posts:publicacion', pk=publicacion.pk)
+    else:
+        form=CommentForm()
+    return render(request,'posts/comentario_form.html', {'form':form})

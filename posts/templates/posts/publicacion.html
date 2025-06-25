@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content%}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="card-body">
             
             <h5 class="card-title">{{ publicacion.title }}</h5>
@@ -24,20 +24,60 @@
         </div>
 
         {% if es_autor %}
-            <div class="mt-4">
-                <a href="{% url 'posts:publicacion_editar' publicacion.pk %}" class="btn btn-primary">Editar</a>
-                <a href="{% url 'posts:publicacion_eliminar' publicacion.pk %}" class="btn btn-danger">Eliminar</a>
-            </div>
+            <a href="{% url 'posts:publicacion_editar' publicacion.pk %}" 
+           class="text-decoration-none text-muted hover-verde">
+            Editar
+        </a>
+        
+        <!-- Enlace Eliminar -->
+        <a href="{% url 'posts:publicacion_eliminar' publicacion.pk %}" 
+           class="text-decoration-none text-muted hover-rojo"
+           onclick="return confirm('¿Eliminar este comentario?')">
+            Eliminar
+        </a>
+
+
+
+            
         {% endif %}
     </div>
-    <div >
-        <a href="{% url 'posts:comentar' publicacion.id%}">
-            comentar
+    <div class="card-footer bg-white">
+        <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">Publicado el {{ publicacion.created }}</small>
+            <a href="{% url 'posts:comentar' publicacion.id %}" class="btn btn-sm btn-outline-primary">
+                <i class="far fa-comment"></i> Comentar
+            </a>
+        </div>
+    </div>
+
+    <div class="col">
+        {%for comentario in comentarios%}
+                        
+            <div class="comentario-container"> <!-- Clase para CSS personalizado -->
+                <p class="mb-1"><strong>{{ comentario.author.username }}</strong></p>
+                <p class="mb-2">{{ comentario.content }}</p>
+                
+                <!-- Botones (solo autor/superuser) -->
+                {% if user == comentario.author or user.is_superuser %}
+                <div class="acciones-comentario d-flex gap-3 position-absolute end-0 top-0 p-2">
+        <!-- Enlace Editar -->
+        <a href="#" 
+           class="text-decoration-none text-muted hover-verde">
+            Editar
+        </a>
+        
+        <!-- Enlace Eliminar -->
+        <a href="#" 
+           class="text-decoration-none text-muted hover-rojo"
+           onclick="return confirm('¿Eliminar este comentario?')">
+            Eliminar
         </a>
     </div>
-    <div class="col-md-6">
-        {%for comentario in comentarios%}
-        <h6>{{comentario.content}}</h6>
+                {% endif %}
+            </div>
+            
+           
+
         {%endfor%}
     </div>
 </div>

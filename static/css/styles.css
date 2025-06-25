@@ -1,0 +1,51 @@
+/* Estilos para el contenedor del comentario */
+.comentario-container {
+    position: relative;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #dee2e6; /* Color de borde similar a Bootstrap */
+    border-radius: 5px;
+}
+
+/* Estilo base para los enlaces de acciones */
+.acciones-comentario a {
+    opacity: 0.3; /* Casi transparente */
+    color: #6c757d !important; /* Gris de Bootstrap (text-muted) */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover para "Editar" */
+.acciones-comentario a.hover-verde:hover {
+    opacity: 1 !important;
+    color: #28a745 !important; /* Verde de Bootstrap */
+    font-weight: 500;
+}
+
+/* Efecto hover para "Eliminar" */
+.acciones-comentario a.hover-rojo:hover {
+    opacity: 1 !important;
+    color: #dc3545 !important; /* Rojo de Bootstrap */
+    font-weight: 500;
+}
+
+/* Mostrar parcialmente al pasar sobre el contenedor */
+.comentario-container:hover .acciones-comentario a {
+    opacity: 0.7;
+}
+.header-custom {
+            background-color: #f8f9fa;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .search-box {
+            border-radius: 20px;
+            border: 1px solid #ced4da;
+        }
+        .icon-btn {
+            font-size: 1.25rem;
+            transition: all 0.3s;
+        }
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }

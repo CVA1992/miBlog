@@ -1,9 +1,11 @@
 {%extends 'base.html'%}
 {%block content%}
     <div class="row">
+        {%if perfil.profile_picture%}
         <div class = "col-md-6">
             <img src="{{perfil.profile_picture.url}}" class="img-fluid rounded w-50">
         </div>
+        {%endif%}
         <div class = "col-md-6">
             <h3> {{perfil.username}}</h3>
             <p> {{perfil.bio}}</p>

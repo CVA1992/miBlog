@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}Página de Inicio{% endblock %}
+{% load static %}
 
 {% block content %}
 <div class="row">
@@ -15,11 +16,20 @@
     {%for publicacion in publicaciones%} 
     <div class="row">
         <div class="col-md-1">
-            <img 
-                src="{{publicacion.author.profile_picture.url}}" 
-                class="rounded-circle border border-white shadow" 
-                style="width: 50px; height: 50px; object-fit: cover;"
-            >
+            {% if publicacion.author.profile_picture %}
+                <img 
+                    src="{{ publicacion.author.profile_picture.url }}" 
+                    class="rounded-circle border border-white shadow" 
+                    style="width: 50px; height: 50px; object-fit: cover;"
+                    alt="Foto de perfil del usuario"
+                >
+            {% else %}
+                <img 
+                    src="/static/images/default-profile-picture.jpg"
+                    class="rounded-circle border border-white shadow" 
+                    style="width: 50px; height: 50px; object-fit: cover;"
+                >
+            {% endif %}
         </div>
         <div class="col-md-11 border-bottom mb-3">
       <div class="card-body">

@@ -49,3 +49,6 @@
         .icon-btn:hover {
             transform: scale(1.1);
         }
+.lateral{
+    color: red;
+}

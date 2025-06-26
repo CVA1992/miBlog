@@ -4,33 +4,31 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <a href="{% url 'posts:post_form'%}">
             <h3>Crear nueva Publicacion</h3>
         </a>
 
     </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                Sidebar content
-            </div>
+</div>
+<div class="row"> 
+    {%for publicacion in publicaciones%} 
+    <div class="row">
+        <div class="col-md-1">
+            <img 
+                src="{{publicacion.author.profile_picture.url}}" 
+                class="rounded-circle border border-white shadow" 
+                style="width: 50px; height: 50px; object-fit: cover;"
+            >
         </div>
-    </div>
-    {%for publicacion in publicaciones%}
-    {% comment %} <div class="col-md-6">
-        <img src='{{publicacion.image.url}}' class='img-fluid'>
-    </div> {% endcomment %}
-    
-    <div class="col-md-12 border-bottom mb-3">
+        <div class="col-md-11 border-bottom mb-3">
       <div class="card-body">
         <a href="{% url 'posts:publicacion' publicacion.id %}">
-        <h5 class="card-title">{{ publicacion.title }}</h5>
+            <h5 class="card-title">{{ publicacion.title }}</h5>
         </a>
         <h6 class="card-subtitle mb-2 text-body-secondary">
             <a href="{% url 'users:perfil_usuario' user_id=publicacion.author.id %}">{{ publicacion.author }} </a> / {{ publicacion.created }}
         </h6>
-        
         <!-- Mostrar imagen solo si existe -->
         {% if publicacion.image %}
             <div class="mb-3">
@@ -41,12 +39,15 @@
                 >
             </div>
         {% endif %}
-        
         <p class="card-text">{{ publicacion.content }}</p>
       </div>
+    </div> 
+
     </div>
-  
+    
     {% endfor %}
+
+    
 </div>
 {% endblock %}
 

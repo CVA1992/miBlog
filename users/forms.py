@@ -10,3 +10,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = User
+class PerfilForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields=('bio','profile_picture','website','birth_date')
